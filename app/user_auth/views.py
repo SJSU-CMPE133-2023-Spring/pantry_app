@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 from .forms import RegistrationForm
 
 
@@ -18,6 +18,10 @@ def login_view(request):
         form = AuthenticationForm()
     return render(request, 'user_auth/login.html', {'form': form})
 
+def logout_view(request):
+    if request.user.is_authenticated:
+        logout(request)
+    return redirect('')
 
 def register_view(request):
     if request.method == 'POST':

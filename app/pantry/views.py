@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.contrib.auth import logout
 
 from .models import *
 from django.contrib.auth.models import User
@@ -13,6 +14,11 @@ def show(req):
 
 def modify(req):
         return HttpResponse(f'W')
+
+def logout_view(request):
+    if request.user.is_authenticated:
+        logout(request)
+    return redirect('')
 
 def add_ingredient(request):
         curr_user = request.user
@@ -31,7 +37,8 @@ def add_ingredient(request):
                        new_ingredient.save()
                        curr_user = User.objects.get(pk=curr_user.id)
                        user_pantry = Pantry(user_id=curr_user, ingredient_id=new_ingredient, quantity=quant)
-                       user_pantry.save() 
+                       user_pantry.save()
+                       return redirect("/pantry/") 
         else:
                 form = IngredientForm()
         return render(request, "pantry/add_ingredient.html", {'form': form})
