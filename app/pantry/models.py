@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.contrib.auth.models import User
 
 
 """
@@ -7,12 +7,6 @@ To apply any changes in here:
  1. python manage.py makemigrations
  2. python manage.py migrate 
 """
-class User(models.Model):
-    username   = models.CharField(max_length=100)
-    email      = models.CharField(max_length=200)
-    password   = models.CharField(max_length=150)
-
-
 class Ingredient(models.Model):
     name        = models.CharField(max_length=200)
     description = models.CharField(max_length=500)
