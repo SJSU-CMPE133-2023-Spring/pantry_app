@@ -1,0 +1,13 @@
+{% extends 'user_auth/base.html' %}
+{% block title %}registration{% endblock %}
+{% load crispy_forms_tags %}
+{% block content_title %}<h2>Register</h2>{% endblock %}
+{% block content %}
+  <form method="post">
+    {% csrf_token %}
+    {{form | crispy}}
+    <div class="row justify-content-center">
+        <button type="submit" class="btn btn-success">Register</button>
+    </div>
+  </form>
+{% endblock %}
