@@ -2,6 +2,9 @@
 {% block title %}registration{% endblock %}
 {% load crispy_forms_tags %}
 {% block content_title %}<h2>Login</h2>{% endblock %}
+{% if err_m %}
+    {{err_m}}
+{% endif %}
 {% block content %}
   <form method="post">
     {% csrf_token %}

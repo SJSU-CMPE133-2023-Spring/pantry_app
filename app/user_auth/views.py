@@ -13,15 +13,13 @@ def login_view(request):
         if user is not None:
             login(request, user)
             return redirect('/pantry/')
-        return redirect(request, 'pantry/construction.html', {})
-    else:
-        form = AuthenticationForm()
-    return render(request, 'user_auth/login.html', {'form': form})
+        else:
+            err_m = "Failed to login. Invalid Credentials"
+    
+    form = AuthenticationForm()
+    return render(request, 'user_auth/login.html', {'form': form, 'err_m': err_m})
 
-def logout_view(request):
-    if request.user.is_authenticated:
-        logout(request)
-    return redirect('')
+
 
 def register_view(request):
     if request.method == 'POST':
