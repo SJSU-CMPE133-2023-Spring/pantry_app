@@ -49,7 +49,7 @@ class AI_RECIPE:
 
     def open_ai_call(self, prompt: str) -> None:
         """
-        Tested and working
+        Tested and working function
         """
 
         assert bool(prompt), "Prompt is empty"
