@@ -16,14 +16,23 @@ class AI_RECIPE:
 
 
     def __str__(self) -> str:
+        """
+        Function prints out the ingredients and favorite dishes
+        """
         return f"Ingredients : {self.ingredients}, favorite_dishes: {self.favorite_dishes}"
     
     
     def my_ingredients(self) -> list:
+        """
+        Functions returns a list of user ingredients
+        """
         return self.ingredients
     
 
     def my_favorite_dishes(self) -> list:
+        """
+        Function returns list of favorite dishes
+        """
         return self.favorite_dishes
     
     def append_ingredients(self, new_ingredient) -> None:
