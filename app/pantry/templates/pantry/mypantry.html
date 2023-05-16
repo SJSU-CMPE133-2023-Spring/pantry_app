@@ -1,0 +1,48 @@
+
+
+{% extends 'base.html' %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  <h1>Pantry</h1>
+  <!-- Add/Edit Pantry Item Form -->
+  <a href="{% url 'add-item' %}" class="edit-btn">Add Item</a>
+  <!-- Pantry Items Table -->
+  <table id="pantry-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Quantity</th>
+        <th>Category</th>
+        <th>Unit</th>
+        <th>Expiration Date</th>
+        <th>Notes</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in pantry_items %}
+        <tr data-item-id="{{ item.id }}">
+          <td>{{ item.name }}</td>
+          <td>{{ item.quantity }}</td>
+          <td>{{ item.category }}</td>
+          <td>{{ item.unit }}</td>
+          <td>{{ item.expiration_date }}</td>
+          <td>{{ item.notes }}</td>
+          <td>
+            <!-- <button class="edit-btn">Edit</button>
+            <button class="remove-btn">Remove</button> -->
+            <a href="{% url 'edit-item' item.id %}" class="edit-btn">Edit</a>
+            <a href="{% url 'delete-item' item.id %}" class="remove-btn">Delete</a>
+          </td>
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="5">No pantry items found.</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
+
+

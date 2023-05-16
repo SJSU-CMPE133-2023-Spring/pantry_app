@@ -4,7 +4,7 @@ from django.contrib.auth import logout
 
 from .models import *
 from django.contrib.auth.models import User
-from .forms import IngredientForm
+from .forms import IngredientForm, PantryItemForm
 
 def index(request):
         return render(request, "pantry/pantry.html", {})
@@ -42,3 +42,42 @@ def add_ingredient(request):
         else:
                 form = IngredientForm()
         return render(request, "pantry/add_ingredient.html", {'form': form})
+
+
+def myPantry(request):
+    items = pantry_item.objects.all()
+    context = {'pantry_items': items}
+
+    return render(request, 'mypantry.html', context)
+
+def addItem(request):
+    form = PantryItemForm()
+
+    if request.method == "POST":
+        form = PantryItemForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('my-pantry')
+        
+    context = {'form': form}
+    return render(request, 'item_form.html', context)
+
+def deleteItem(request, pk):
+    item = pantry_item.objects.get(id=pk)
+    if request.method == 'POST':
+        item.delete()
+        return redirect('my-pantry')
+    return render(request, 'delete.html', {'obj':item})
+
+def editItem(request, pk):
+    item = pantry_item.objects.get(id=pk)
+    form = PantryItemForm(instance=item)
+
+    if request.method == "POST":
+        form = PantryItemForm(request.POST, instance=item)
+        if form.is_valid():
+            form.save()
+            return redirect('my-pantry')
+
+    context = {'form': form}
+    return render(request, 'item_form.html', context)

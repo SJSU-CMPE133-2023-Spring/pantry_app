@@ -1,0 +1,35 @@
+ /* Table Styles */
+  #pantry-table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  #pantry-table th,
+  #pantry-table td {
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: left;
+  }
+  
+  #pantry-table th {
+    background-color: #f2f2f2;
+font-weight: bold;
+}
+
+.edit-btn,
+.remove-btn {
+  display: inline-block;
+  background-color: #4CAF50;
+  color: white;
+  padding: 8px 16px;
+  margin-right: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.edit-btn:hover,
+.remove-btn:hover {
+  background-color: #3e8e41;
+}

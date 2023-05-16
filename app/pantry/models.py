@@ -38,3 +38,22 @@ class RecipeIngredients(models.Model):
 
 
 # TODO proper implementation of user model 
+
+class Category(models.Model):
+    name = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.name
+    
+class pantry_item(models.Model):
+    name = models.CharField(max_length=100)
+    quantity = models.IntegerField(default=0)
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
+    unit     = models.CharField(max_length = 25, null = True, blank=True)
+    expiration_date = models.DateField(null=True, blank=True)
+    notes = models.TextField(null=True, blank=True)
+    updated = models.DateTimeField(auto_now=True, null = True, blank=True)
+    created = models.DateTimeField(auto_now_add=True, null = True, blank=True)
+
+    class Meta:
+        ordering = ['-updated', '-created']
